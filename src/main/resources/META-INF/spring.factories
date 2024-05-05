@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.jxch.capital.py4j.config.Py4JAutoConfig

@@ -1,0 +1,5 @@
+capital:
+  py4j:
+    py:
+      executor:
+        path: G:\data\tmp\py_executor
