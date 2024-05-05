@@ -40,6 +40,7 @@ public class TestBinderTest {
 * `Py4JAutoConfig` 类中可以通过配置相关环境变量来自定义要下载的python解释器链接和本地安装目录（默认使用嵌入式python版本，大小只有21M，速度很快）
 * `PyBindRunner<Void, String>`中第一个泛型代表入参类型，此类型会被`PyBindRunnerParamProcessor`组件自动编码为`argparse`形式的入参；第二个类型为输出类型
   * 可以通过`PyParam`注解来控制对python脚本的入参格式
-  * 可以通过`Converter<String, T>`的Spring组件来自定义输出的类型（由于进程间通信只能通过字符串，所以需要自定义转换类型）
+  * 可以通过`PyOutConverter<String>`的Spring组件来自定义输出的类型（由于进程间通信只能通过字符串，所以需要自定义转换类型）
+    * 然后在`@PyBind`注解中指定所需的转换器`PyOutConverter<String>`，默认输出字符串，不转换
 * 可以直接`PyExecutor`组件阻塞执行python命令，也可以执行pip命令安装包
 

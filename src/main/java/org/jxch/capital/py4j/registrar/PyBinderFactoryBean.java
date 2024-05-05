@@ -28,7 +28,6 @@ public class PyBinderFactoryBean implements FactoryBean<Object> {
 
     @Override
     public Object getObject() {
-        ;
         return Proxy.newProxyInstance(pyBindRunnerClazz.getClassLoader(),
                 new Class<?>[]{pyBindRunnerClazz},
                 new PyBinderInvocationHandler(pyExecutor, processor, py4JAutoConfig,

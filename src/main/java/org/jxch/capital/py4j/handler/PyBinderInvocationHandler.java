@@ -4,8 +4,8 @@ import org.jxch.capital.py4j.bind.PyBind;
 import org.jxch.capital.py4j.bind.PyBindRunner;
 import org.jxch.capital.py4j.bind.processor.PyBindRunnerParamProcessor;
 import org.jxch.capital.py4j.config.Py4JAutoConfig;
+import org.jxch.capital.py4j.converter.PyOutConverter;
 import org.jxch.capital.py4j.executor.PyExecutor;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -23,10 +23,10 @@ public class PyBinderInvocationHandler implements InvocationHandler {
     private final PyBindRunnerParamProcessor processor;
     private final PyExecutor pyExecutor;
     private final Py4JAutoConfig py4JAutoConfig;
-    private final Converter<String, ?> converter;
+    private final PyOutConverter<String> converter;
 
     public PyBinderInvocationHandler(PyExecutor pyExecutor, PyBindRunnerParamProcessor processor, Py4JAutoConfig py4JAutoConfig,
-                                     Converter<String, ?> converter) {
+                                     PyOutConverter<String> converter) {
         this.pyExecutor = pyExecutor;
         this.processor = processor;
         this.py4JAutoConfig = py4JAutoConfig;

@@ -2,7 +2,7 @@ package org.jxch.capital.py4j.bind;
 
 
 import org.jxch.capital.py4j.converter.EmptyConverter;
-import org.springframework.core.convert.converter.Converter;
+import org.jxch.capital.py4j.converter.PyOutConverter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +17,6 @@ public @interface PyBind {
 
     String suffix() default ".py";
 
-    Class<? extends Converter> converter() default EmptyConverter.class;
+    Class<? extends PyOutConverter> converter() default EmptyConverter.class;
 
 }
