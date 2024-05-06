@@ -11,6 +11,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.File;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -35,8 +37,16 @@ public class PyBinderInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (!method.getDeclaringClass().equals(PyBindRunner.class)) {
-            return method.invoke(proxy, args);
+        if (method.isDefault()) {
+            Constructor<MethodHandles.Lookup> constructor = MethodHandles.Lookup.class.getDeclaredConstructor(Class.class, int.class);
+            constructor.setAccessible(true);
+
+            // 对于非public的类，其模式应该是MethodHandles.Lookup.PRIVATE
+            Class<?> declaringClass = method.getDeclaringClass();
+            return constructor.newInstance(declaringClass, MethodHandles.Lookup.PRIVATE)
+                    .unreflectSpecial(method, declaringClass)
+                    .bindTo(proxy)
+                    .invokeWithArguments(args);
         }
 
         Class<?> clazz = Arrays.stream(proxy.getClass().getInterfaces())
