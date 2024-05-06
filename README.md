@@ -7,6 +7,14 @@ py4j本地执行引擎与springboot的无缝集成
 3. 灵活性，用户可以自由指定python版本，默认使用嵌入式python环境，大小仅21M，初始化环境速度很快
 
 ## 代码示例
+0. 引入依赖
+```xml
+<dependency>
+  <groupId>io.github.jxch</groupId>
+  <artifactId>capital-py4j-spring-boot-starter</artifactId>
+  <version>3.2.5-alpha.1</version>
+</dependency>
+```
 1. 在/py/test.py中准备示例python代码
 ```python
 print("test py")
